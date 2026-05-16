@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Tajawal', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      padding: 25px;
+      background: linear-gradient(145deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .glow-1 {
+      position: absolute;
+      width: 300px; height: 300px;
+      background: rgba(99, 102, 241, 0.15);
+      border-radius: 50%;
+      filter: blur(80px);
+      top: -100px; right: -50px;
+    }
+    .glow-2 {
+      position: absolute;
+      width: 250px; height: 250px;
+      background: rgba(16, 185, 129, 0.12);
+      border-radius: 50%;
+      filter: blur(80px);
+      bottom: -80px; left: -50px;
+    }
+    .container {
+      max-width: 700px;
+      width: 100%;
+      position: relative;
+      z-index: 10;
+    }
+    .question-header {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+    .question-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #6366f1, #10b981);
+      color: white;
+      padding: 10px 25px;
+      border-radius: 25px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    .question-badge svg {
+      width: 20px;
+      height: 20px;
+      stroke: white;
+    }
+    .question-text {
+      font-size: 1.4rem;
+      line-height: 1.7;
+      font-weight: 600;
+    }
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 25px;
+    }
+    .option {
+      background: linear-gradient(145deg, rgba(99, 102, 241, 0.1), rgba(99, 102, 241, 0.05));
+      border: 2px solid rgba(99, 102, 241, 0.2);
+      border-radius: 16px;
+      padding: 18px 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .option:hover {
+      background: linear-gradient(145deg, rgba(99, 102, 241, 0.2), rgba(99, 102, 241, 0.1));
+      border-color: #6366f1;
+      transform: translateX(-5px);
+    }
+    .option.correct {
+      background: linear-gradient(145deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.1));
+      border-color: #10b981;
+    }
+    .option.wrong {
+      background: linear-gradient(145deg, rgba(239, 68, 68, 0.2), rgba(239, 68, 68, 0.1));
+      border-color: #ef4444;
+    }
+    .option-letter {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, #4f46e5, #6366f1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .option span {
+      font-size: 1.05rem;
+    }
+    .feedback {
+      margin-top: 20px;
+      padding: 20px 25px;
+      border-radius: 16px;
+      display: none;
+      text-align: center;
+    }
+    .feedback.show {
+      display: block;
+      animation: fadeIn 0.4s ease-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .feedback.correct {
+      background: linear-gradient(145deg, rgba(16, 185, 129, 0.15), rgba(16, 185, 129, 0.05));
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+    .feedback.wrong {
+      background: linear-gradient(145deg, rgba(239, 68, 68, 0.15), rgba(239, 68, 68, 0.05));
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+    .feedback-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 12px;
+    }
+    .feedback.correct .feedback-icon {
+      background: linear-gradient(135deg, #059669, #10b981);
+    }
+    .feedback.wrong .feedback-icon {
+      background: linear-gradient(135deg, #dc2626, #ef4444);
+    }
+    .feedback-icon svg {
+      width: 28px;
+      height: 28px;
+      stroke: white;
+    }
+    .feedback-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .feedback.correct .feedback-title { color: #34d399; }
+    .feedback.wrong .feedback-title { color: #f87171; }
+    .feedback-text {
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.85);
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <div class="glow-1"></div>
+  <div class="glow-2"></div>
+  
+  <div class="container">
+    <div class="question-header">
+      <div class="question-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/>
+          <line x1="12" y1="17" x2="12.01" y2="17"/>
+        </svg>
+        <span>السؤال 1 من 5</span>
+      </div>
+      <div class="question-text">
+        ما هو الحد الأدنى الموصى به لطول كلمة المرور القوية؟
+      </div>
+    </div>
+    
+    <div class="options">
+      <div class="option" onclick="checkAnswer(this, false)">
+        <div class="option-letter">أ</div>
+        <span>4 أحرف</span>
+      </div>
+      <div class="option" onclick="checkAnswer(this, false)">
+        <div class="option-letter">ب</div>
+        <span>6 أحرف</span>
+      </div>
+      <div class="option" onclick="checkAnswer(this, true)">
+        <div class="option-letter">ج</div>
+        <span>8 أحرف على الأقل</span>
+      </div>
+      <div class="option" onclick="checkAnswer(this, false)">
+        <div class="option-letter">د</div>
+        <span>3 أحرف كافية</span>
+      </div>
+    </div>
+    
+    <div class="feedback correct" id="correctFeedback">
+      <div class="feedback-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+          <polyline points="20,6 9,17 4,12"/>
+        </svg>
+      </div>
+      <div class="feedback-title">إجابة صحيحة!</div>
+      <div class="feedback-text">كلمة المرور يجب أن تكون 8 أحر�� على الأقل مع مزيج من الأحرف والأرقام والرموز.</div>
+    </div>
+    
+    <div class="feedback wrong" id="wrongFeedback">
+      <div class="feedback-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </div>
+      <div class="feedback-title">إجابة خاطئة</div>
+      <div class="feedback-text">الإجابة الصحيحة: 8 أحرف على الأقل. كلمات المرور القصيرة سهلة الاختراق!</div>
+    </div>
+  </div>
+
+  <script>
+    let answered = false;
+    function checkAnswer(element, isCorrect) {
+      if (answered) return;
+      answered = true;
+      
+      document.querySelectorAll('.option').forEach(opt => {
+        opt.style.pointerEvents = 'none';
+        opt.style.opacity = '0.7';
+      });
+      element.style.opacity = '1';
+      
+      if (isCorrect) {
+        element.classList.add('correct');
+        document.getElementById('correctFeedback').classList.add('show');
+      } else {
+        element.classList.add('wrong');
+        document.getElementById('wrongFeedback').classList.add('show');
+        document.querySelectorAll('.option')[2].classList.add('correct');
+        document.querySelectorAll('.option')[2].style.opacity = '1';
+      }
+    }
+  </script>
+</body>
+</html>

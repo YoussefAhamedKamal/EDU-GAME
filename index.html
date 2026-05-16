@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>حارس الأمان الرقمي - اللعبة التعليمية</title>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Tajawal', sans-serif;
+      background: linear-gradient(135deg, #0a0a1a 0%, #1a1a3e 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      padding: 20px;
+    }
+    .container {
+      max-width: 600px;
+      text-align: center;
+      animation: fadeIn 1s ease-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #a5b4fc, #6366f1, #10b981);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    p {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 30px;
+      line-height: 1.8;
+    }
+    .button-group {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    button {
+      padding: 15px 35px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-family: 'Tajawal', sans-serif;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #4f46e5, #6366f1);
+      color: white;
+      box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+    }
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(99, 102, 241, 0.5);
+    }
+    .btn-secondary {
+      background: rgba(99, 102, 241, 0.2);
+      color: #a5b4fc;
+      border: 2px solid rgba(99, 102, 241, 0.5);
+    }
+    .btn-secondary:hover {
+      background: rgba(99, 102, 241, 0.3);
+      border-color: #6366f1;
+    }
+    .features {
+      margin-top: 50px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      padding: 30px;
+      background: rgba(99, 102, 241, 0.1);
+      border-radius: 20px;
+      border: 1px solid rgba(99, 102, 241, 0.2);
+    }
+    .feature {
+      padding: 15px;
+    }
+    .feature-icon {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+    .feature h3 {
+      font-size: 1rem;
+      margin-bottom: 5px;
+      color: #a5b4fc;
+    }
+    .feature p {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.7);
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🛡️ حارس الأمان الرقمي</h1>
+    <p>رحلة تعليمية تفاعلية لتعلم أساسيات الأمن السيبراني والحماية الرقمية</p>
+    
+    <div class="button-group">
+      <button class="btn-primary" onclick="window.location.href='slide-01-intro.html'">ابدأ ال��حلة</button>
+      <button class="btn-secondary" onclick="window.location.href='README-GUIDE.html'">دليل الاستخدام</button>
+    </div>
+    
+    <div class="features">
+      <div class="feature">
+        <div class="feature-icon">📚</div>
+        <h3>12 شريحة تعليمية</h3>
+        <p>محتوى شامل عن الأمن السيبراني</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🎮</div>
+        <h3>5 أسئلة تفاعلية</h3>
+        <p>اختبر معلوماتك</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">✨</div>
+        <h3>تصاميم جذابة</h3>
+        <p>واجهة مستخدم حديثة</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">📱</div>
+        <h3>متوافق مع الجوال</h3>
+        <p>يعمل على جميع الأجهزة</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

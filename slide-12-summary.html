@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Tajawal', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      padding: 25px;
+      background: #0a0a1a;
+      position: relative;
+      overflow: hidden;
+    }
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: 
+        radial-gradient(ellipse at 20% 20%, rgba(99, 102, 241, 0.2) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(16, 185, 129, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(245, 158, 11, 0.1) 0%, transparent 60%);
+    }
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+      animation: fall 5s infinite;
+      z-index: 1;
+    }
+    .confetti:nth-child(1) { left: 10%; background: #6366f1; animation-delay: 0s; }
+    .confetti:nth-child(2) { left: 20%; background: #10b981; animation-delay: 0.5s; }
+    .confetti:nth-child(3) { left: 30%; background: #f59e0b; animation-delay: 1s; }
+    .confetti:nth-child(4) { left: 40%; background: #ec4899; animation-delay: 1.5s; }
+    .confetti:nth-child(5) { left: 50%; background: #6366f1; animation-delay: 2s; }
+    .confetti:nth-child(6) { left: 60%; background: #10b981; animation-delay: 2.5s; }
+    .confetti:nth-child(7) { left: 70%; background: #f59e0b; animation-delay: 3s; }
+    .confetti:nth-child(8) { left: 80%; background: #ec4899; animation-delay: 3.5s; }
+    .confetti:nth-child(9) { left: 90%; background: #6366f1; animation-delay: 4s; }
+    @keyframes fall {
+      0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+    }
+    .container {
+      max-width: 750px;
+      width: 100%;
+      position: relative;
+      z-index: 10;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+    .trophy-container {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 20px;
+      background: linear-gradient(135deg, #fbbf24, #f59e0b);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 15px 50px rgba(245, 158, 11, 0.4);
+      animation: trophyPulse 2s ease-in-out infinite;
+    }
+    @keyframes trophyPulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 15px 50px rgba(245, 158, 11, 0.4); }
+      50% { transform: scale(1.05); box-shadow: 0 20px 60px rgba(245, 158, 11, 0.6); }
+    }
+    .trophy-container svg {
+      width: 60px;
+      height: 60px;
+      stroke: #1f2937;
+    }
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #a5b4fc, #6366f1, #10b981);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .content-card {
+      background: linear-gradient(145deg, rgba(30, 27, 75, 0.8), rgba(15, 23, 42, 0.9));
+      border-radius: 24px;
+      padding: 30px;
+      border: 1px solid rgba(99, 102, 241, 0.2);
+      backdrop-filter: blur(20px);
+    }
+    .intro-text {
+      font-size: 1.1rem;
+      line-height: 1.9;
+      color: rgba(255, 255, 255, 0.85);
+      margin-bottom: 25px;
+      text-align: center;
+    }
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 25px;
+    }
+    .summary-item {
+      background: linear-gradient(145deg, rgba(99, 102, 241, 0.1), rgba(99, 102, 241, 0.05));
+      border-radius: 14px;
+      padding: 18px 12px;
+      text-align: center;
+      border: 1px solid rgba(99, 102, 241, 0.15);
+      transition: all 0.3s ease;
+    }
+    .summary-item:hover {
+      transform: scale(1.05);
+      border-color: rgba(99, 102, 241, 0.4);
+    }
+    .summary-icon {
+      width: 45px;
+      height: 45px;
+      background: linear-gradient(135deg, #4f46e5, #6366f1);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 10px;
+    }
+    .summary-icon svg {
+      width: 24px;
+      height: 24px;
+      stroke: white;
+    }
+    .summary-text {
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.8);
+    }
+    .badge-earned {
+      background: linear-gradient(135deg, #fbbf24, #f59e0b);
+      border-radius: 20px;
+      padding: 25px;
+      text-align: center;
+      margin-bottom: 25px;
+      position: relative;
+      overflow: hidden;
+    }
+    .badge-earned::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      animation: shine 3s infinite;
+    }
+    @keyframes shine {
+      0% { left: -100%; }
+      50%, 100% { left: 100%; }
+    }
+    .badge-icon-container {
+      width: 80px;
+      height: 80px;
+      background: rgba(31, 41, 55, 0.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 15px;
+    }
+    .badge-icon-container svg {
+      width: 45px;
+      height: 45px;
+      stroke: #1f2937;
+    }
+    .badge-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #1f2937;
+      margin-bottom: 8px;
+    }
+    .badge-desc {
+      color: #374151;
+      font-size: 1rem;
+    }
+    .next-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      width: 100%;
+      background: linear-gradient(135deg, #4f46e5, #6366f1);
+      border: none;
+      color: white;
+      padding: 18px;
+      border-radius: 16px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      font-family: 'Tajawal', sans-serif;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+    }
+    .next-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(99, 102, 241, 0.5);
+    }
+    .next-btn svg {
+      width: 24px;
+      height: 24px;
+      stroke: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="confetti"></div>
+  <div class="confetti"></div>
+  <div class="confetti"></div>
+  <div class="confetti"></div>
+  <div class="confetti"></div>
+  <div class="confetti"></div>
+  <div class="confetti"></div>
+  <div class="confetti"></div>
+  <div class="confetti"></div>
+  
+  <div class="container">
+    <div class="header">
+      <div class="trophy-container">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+          <path d="M6 9H4.5a2.5 2.5 0 010-5H6"/>
+          <path d="M18 9h1.5a2.5 2.5 0 000-5H18"/>
+          <path d="M4 22h16"/>
+          <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
+          <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
+          <path d="M18 2H6v7a6 6 0 0012 0V2z"/>
+        </svg>
+      </div>
+      <h1>أحسنت! أكملت الرحلة</h1>
+    </div>
+    
+    <div class="content-card">
+      <p class="intro-text">
+        لقد تعلمت أساسيات الأمن السيبراني وأصبحت مستعداً لحماية نفسك في العالم الرقمي!
+      </p>
+      
+      <div class="summary-grid">
+        <div class="summary-item">
+          <div class="summary-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+              <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 11-7.778 7.778 5.5 5.5 0 017.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/>
+            </svg>
+          </div>
+          <div class="summary-text">كلمات مرور قوية</div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+              <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+            </svg>
+          </div>
+          <div class="summary-text">تجنب التصيد</div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+          </div>
+          <div class="summary-text">حماية الخصوصية</div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+              <path d="M5 12.55a11 11 0 0114.08 0"/>
+              <path d="M1.42 9a16 16 0 0121.16 0"/>
+              <path d="M8.53 16.11a6 6 0 016.95 0"/>
+              <circle cx="12" cy="20" r="1"/>
+            </svg>
+          </div>
+          <div class="summary-text">أمان الواي فاي</div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+              <path d="M21 12a9 9 0 11-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/>
+              <path d="M21 3v5h-5"/>
+            </svg>
+          </div>
+          <div class="summary-text">التحديثات</div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+              <path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/>
+              <polyline points="17,21 17,13 7,13 7,21"/>
+              <polyline points="7,3 7,8 15,8"/>
+            </svg>
+          </div>
+          <div class="summary-text">النسخ الاحتياطي</div>
+        </div>
+      </div>
+      
+      <div class="badge-earned">
+        <div class="badge-icon-container">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="M9 12l2 2 4-4"/>
+          </svg>
+        </div>
+        <div class="badge-title">حارس الأمان الرقمي</div>
+        <div class="badge-desc">تهانينا! حصلت على شارة الحماية الرقمية</div>
+      </div>
+      
+      <button class="next-btn" onclick="alert('انتقل للشريحة التالية لبدء الاختبار!')">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/>
+          <line x1="12" y1="17" x2="12.01" y2="17"/>
+        </svg>
+        <span>ابدأ الاختبار النهائي</span>
+      </button>
+    </div>
+  </div>
+</body>
+</html>

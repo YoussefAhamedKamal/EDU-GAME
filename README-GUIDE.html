@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>دليل إضافة الشرائح في Genially</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background: #f5f5f5;
+      padding: 40px 20px;
+      line-height: 1.8;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #1e3a5f;
+      font-size: 2rem;
+      margin-bottom: 30px;
+      text-align: center;
+      border-bottom: 3px solid #00d4ff;
+      padding-bottom: 15px;
+    }
+    h2 {
+      color: #1e3a5f;
+      font-size: 1.4rem;
+      margin: 30px 0 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .method {
+      background: #f8fafc;
+      border-radius: 15px;
+      padding: 25px;
+      margin: 20px 0;
+      border-right: 4px solid #00d4ff;
+    }
+    .method-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #00d4ff;
+      margin-bottom: 15px;
+    }
+    ol, ul {
+      padding-right: 25px;
+    }
+    li {
+      margin: 10px 0;
+    }
+    .highlight {
+      background: #e0f7fa;
+      padding: 3px 8px;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+    .warning {
+      background: #fff3e0;
+      border: 1px solid #ff9800;
+      border-radius: 10px;
+      padding: 15px;
+      margin: 20px 0;
+    }
+    .warning strong {
+      color: #e65100;
+    }
+    .files-list {
+      background: #1e3a5f;
+      color: white;
+      border-radius: 10px;
+      padding: 20px;
+      margin: 20px 0;
+    }
+    .files-list h3 {
+      color: #00d4ff;
+      margin-bottom: 15px;
+    }
+    .file-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .file-name { color: #00ff88; }
+    .file-desc { color: #aaa; font-size: 0.9rem; }
+    code {
+      background: #263238;
+      color: #80cbc4;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+    .step-number {
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      background: #00d4ff;
+      color: white;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 30px;
+      margin-left: 10px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>دليل إضافة الشرائح في Genially</h1>
+    
+    <div class="method">
+      <div class="method-title">الطريقة 1: تضمين كـ iframe (الأسهل والأفضل)</div>
+      <ol>
+        <li><span class="step-number">1</span> انشر المشروع على Vercel بالضغط على <span class="highlight">Publish</span></li>
+        <li><span class="step-number">2</span> انسخ رابط الموقع المنشور (مثل: <code>https://your-project.vercel.app</code>)</li>
+        <li><span class="step-number">3</span> في Genially، اختر <span class="highlight">Insert → Others → External content</span></li>
+        <li><span class="step-number">4</span> الصق الرابط واضبط حجم الإطار ليملأ الشريحة</li>
+      </ol>
+    </div>
+    
+    <div class="method">
+      <div class="method-title">الطريقة 2: تضمين HTML مباشرة في Genially</div>
+      <ol>
+        <li><span class="step-number">1</span> في Genially، اختر <span class="highlight">Insert → Others → Embed</span></li>
+        <li><span class="step-number">2</span> انسخ كود HTML من أحد الملفات أدناه</li>
+        <li><span class="step-number">3</span> الصق الكود في مربع التضمين</li>
+        <li><span class="step-number">4</span> كرر لكل شريحة</li>
+      </ol>
+      
+      <div class="warning">
+        <strong>ملاحظة:</strong> بعض ميزات JavaScript التفاعلية قد لا تعمل في وضع التضمين المباشر. الطريقة 1 مضمونة أكثر.
+      </div>
+    </div>
+    
+    <div class="method">
+      <div class="method-title">الطريقة 3: استضافة كل شريحة على حدة</div>
+      <ol>
+        <li><span class="step-number">1</span> ارفع ملفات HTML على GitHub Pages أو Netlify أو أي استضافة مجانية</li>
+        <li><span class="step-number">2</span> كل ملف سيكون له رابط خاص</li>
+        <li><span class="step-number">3</span> استخدم روابط الملفات الفردية في Genially</li>
+      </ol>
+    </div>
+    
+    <div class="files-list">
+      <h3>قائمة الملفات المتاحة:</h3>
+      
+      <h4 style="color: #00d4ff; margin: 20px 0 10px;">شرائح المحتوى (12 شريحة):</h4>
+      <div class="file-item"><span class="file-name">slide-01-intro.html</span><span class="file-desc">المقدمة</span></div>
+      <div class="file-item"><span class="file-name">slide-02-what-is-cybersecurity.html</span><span class="file-desc">ما هو الأمن السيبراني</span></div>
+      <div class="file-item"><span class="file-name">slide-03-passwords.html</span><span class="file-desc">كلمات المرور (تفاعلي)</span></div>
+      <div class="file-item"><span class="file-name">slide-04-phishing.html</span><span class="file-desc">التصيد الاحتيالي</span></div>
+      <div class="file-item"><span class="file-name">slide-05-privacy.html</span><span class="file-desc">حماية الخصوصية</span></div>
+      <div class="file-item"><span class="file-name">slide-06-wifi.html</span><span class="file-desc">أمان الواي فاي</span></div>
+      <div class="file-item"><span class="file-name">slide-07-updates.html</span><span class="file-desc">التحديثات (تفاعلي)</span></div>
+      <div class="file-item"><span class="file-name">slide-08-social-engineering.html</span><span class="file-desc">الهندسة الاجتماعية</span></div>
+      <div class="file-item"><span class="file-name">slide-09-phone-security.html</span><span class="file-desc">أمان الهاتف</span></div>
+      <div class="file-item"><span class="file-name">slide-10-cyberbullying.html</span><span class="file-desc">التنمر الإلكتروني</span></div>
+      <div class="file-item"><span class="file-name">slide-11-backup.html</span><span class="file-desc">النسخ الاحتياطي</span></div>
+      <div class="file-item"><span class="file-name">slide-12-summary.html</span><span class="file-desc">الملخص</span></div>
+      
+      <h4 style="color: #00ff88; margin: 20px 0 10px;">شرائح الأسئلة (5 أسئلة):</h4>
+      <div class="file-item"><span class="file-name">quiz-01.html</span><span class="file-desc">سؤال كلمات المرور</span></div>
+      <div class="file-item"><span class="file-name">quiz-02.html</span><span class="file-desc">سؤال التصيد</span></div>
+      <div class="file-item"><span class="file-name">quiz-03.html</span><span class="file-desc">سؤال الواي فاي</span></div>
+      <div class="file-item"><span class="file-name">quiz-04.html</span><span class="file-desc">سؤال التنمر</span></div>
+      <div class="file-item"><span class="file-name">quiz-05.html</span><span class="file-desc">سؤال النسخ الاحتياطي</span></div>
+    </div>
+    
+    <h2>نصائح للعرض في Genially:</h2>
+    <ul>
+      <li>اضبط حجم إطار التضمين على <span class="highlight">100% عرض × 100% ارتفاع</span></li>
+      <li>أزل الحدود والخلفية من إعدادات التضمين</li>
+      <li>يمكنك إضافة أزرار تنقل في Genially حول الإطار</li>
+      <li>اختبر العرض على أجهزة مختلفة للتأكد من التوافق</li>
+    </ul>
+  </div>
+</body>
+</html>

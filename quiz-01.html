@@ -165,9 +165,64 @@
       color: rgba(255, 255, 255, 0.85);
       line-height: 1.6;
     }
+    .nav-buttons {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+    .nav-btn {
+      padding: 12px 25px;
+      border: none;
+      border-radius: 20px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: 'Tajawal', sans-serif;
+      transition: all 0.3s;
+      font-size: 1rem;
+    }
+    .prev-btn {
+      background: rgba(99, 102, 241, 0.3);
+      color: #a5b4fc;
+      border: 2px solid rgba(99, 102, 241, 0.5);
+    }
+    .prev-btn:hover {
+      background: rgba(99, 102, 241, 0.5);
+      border-color: #6366f1;
+    }
+    .next-btn {
+      background: linear-gradient(135deg, #4f46e5, #6366f1);
+      color: white;
+      box-shadow: 0 5px 20px rgba(99, 102, 241, 0.4);
+    }
+    .next-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(99, 102, 241, 0.5);
+    }
+    .mute-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: rgba(99, 102, 241, 0.3);
+      border: 2px solid rgba(99, 102, 241, 0.5);
+      color: #a5b4fc;
+      padding: 10px 20px;
+      border-radius: 20px;
+      cursor: pointer;
+      z-index: 1000;
+      transition: all 0.3s;
+      font-weight: 700;
+    }
+    .mute-btn:hover {
+      background: rgba(99, 102, 241, 0.5);
+      border-color: #6366f1;
+    }
   </style>
 </head>
 <body>
+  <button class="mute-btn" id="muteBtn" onclick="toggleMute()">🔊 صوت</button>
+  
   <div class="glow-1"></div>
   <div class="glow-2"></div>
   
@@ -212,7 +267,7 @@
         </svg>
       </div>
       <div class="feedback-title">إجابة صحيحة!</div>
-      <div class="feedback-text">كلمة المرور يجب أن تكون 8 أحر�� على الأقل مع مزيج من الأحرف والأرقام والرموز.</div>
+      <div class="feedback-text">كلمة المرور يجب أن تكون 8 أحرف على الأقل مع مزيج من الأحرف والأرقام والرموز.</div>
     </div>
     
     <div class="feedback wrong" id="wrongFeedback">
@@ -225,13 +280,88 @@
       <div class="feedback-title">إجابة خاطئة</div>
       <div class="feedback-text">الإجابة الصحيحة: 8 أحرف على الأقل. كلمات المرور القصيرة سهلة الاختراق!</div>
     </div>
+
+    <div class="nav-buttons">
+      <button class="nav-btn prev-btn" onclick="navigatePage('slide-01-intro.html')">← السابق</button>
+      <button class="nav-btn next-btn" onclick="navigatePage('quiz-02.html')">التالي →</button>
+    </div>
   </div>
 
   <script>
+    class AudioManager {
+      constructor() {
+        this.isMuted = false;
+        this.audioContext = null;
+      }
+
+      playButtonClick() {
+        this.playTone(800, 0.1, 0.1);
+      }
+
+      playCorrectAnswer() {
+        this.playTone(523, 0.15, 0.1);
+        setTimeout(() => this.playTone(659, 0.15, 0.1), 150);
+        setTimeout(() => this.playTone(784, 0.15, 0.15), 300);
+      }
+
+      playWrongAnswer() {
+        this.playTone(300, 0.2, 0.2);
+        setTimeout(() => this.playTone(250, 0.2, 0.2), 150);
+      }
+
+      playPageTransition() {
+        this.playTone(600, 0.1, 0.05);
+        setTimeout(() => this.playTone(700, 0.1, 0.05), 80);
+      }
+
+      playTone(frequency, volume, duration) {
+        if (this.isMuted) return;
+
+        try {
+          if (!this.audioContext) {
+            this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+          }
+
+          const oscillator = this.audioContext.createOscillator();
+          const gainNode = this.audioContext.createGain();
+
+          oscillator.connect(gainNode);
+          gainNode.connect(this.audioContext.destination);
+
+          oscillator.frequency.value = frequency;
+          oscillator.type = 'sine';
+
+          gainNode.gain.setValueAtTime(volume, this.audioContext.currentTime);
+          gainNode.gain.exponentialRampToValueAtTime(0.01, this.audioContext.currentTime + duration);
+
+          oscillator.start(this.audioContext.currentTime);
+          oscillator.stop(this.audioContext.currentTime + duration);
+        } catch (e) {
+          console.log('الصوت غير متاح');
+        }
+      }
+
+      toggleMute() {
+        this.isMuted = !this.isMuted;
+        return this.isMuted;
+      }
+    }
+
+    const audioManager = new AudioManager();
     let answered = false;
+
+    function toggleMute() {
+      const isMuted = audioManager.toggleMute();
+      const btn = document.getElementById('muteBtn');
+      btn.textContent = isMuted ? '🔇 صامت' : '🔊 صوت';
+      audioManager.playButtonClick();
+    }
+
     function checkAnswer(element, isCorrect) {
       if (answered) return;
       answered = true;
+      
+      audioManager.playButtonClick();
       
       document.querySelectorAll('.option').forEach(opt => {
         opt.style.pointerEvents = 'none';
@@ -242,12 +372,21 @@
       if (isCorrect) {
         element.classList.add('correct');
         document.getElementById('correctFeedback').classList.add('show');
+        audioManager.playCorrectAnswer();
       } else {
         element.classList.add('wrong');
         document.getElementById('wrongFeedback').classList.add('show');
         document.querySelectorAll('.option')[2].classList.add('correct');
         document.querySelectorAll('.option')[2].style.opacity = '1';
+        audioManager.playWrongAnswer();
       }
+    }
+
+    function navigatePage(url) {
+      audioManager.playPageTransition();
+      setTimeout(() => {
+        window.location.href = url;
+      }, 200);
     }
   </script>
 </body>
